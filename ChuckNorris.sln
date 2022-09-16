@@ -2,7 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{58F146A2-48F2-4B6C-9CA3-E6352CADBC26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{954B39FB-BA81-4FC3-BBF2-CA0DA1FD0057}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Harvester", "Harvester\Harvester.csproj", "{6206838F-53EB-4905-93A0-FC6CDA76C465}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Business.csproj", "{EB364CA3-C10E-4FE4-82A0-F104532C26AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +16,13 @@ Global
 		{58F146A2-48F2-4B6C-9CA3-E6352CADBC26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58F146A2-48F2-4B6C-9CA3-E6352CADBC26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58F146A2-48F2-4B6C-9CA3-E6352CADBC26}.Release|Any CPU.Build.0 = Release|Any CPU
-		{954B39FB-BA81-4FC3-BBF2-CA0DA1FD0057}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{954B39FB-BA81-4FC3-BBF2-CA0DA1FD0057}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{954B39FB-BA81-4FC3-BBF2-CA0DA1FD0057}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{954B39FB-BA81-4FC3-BBF2-CA0DA1FD0057}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6206838F-53EB-4905-93A0-FC6CDA76C465}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6206838F-53EB-4905-93A0-FC6CDA76C465}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6206838F-53EB-4905-93A0-FC6CDA76C465}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6206838F-53EB-4905-93A0-FC6CDA76C465}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB364CA3-C10E-4FE4-82A0-F104532C26AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB364CA3-C10E-4FE4-82A0-F104532C26AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB364CA3-C10E-4FE4-82A0-F104532C26AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB364CA3-C10E-4FE4-82A0-F104532C26AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

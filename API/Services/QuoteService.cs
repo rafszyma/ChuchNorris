@@ -1,35 +1,51 @@
-﻿
-using API.Settings;
-using Contracts;
-using Microsoft.Extensions.Options;
+﻿using API.Interfaces;
+using API.Persistence;
+using Business.Interfaces;
+using Business.Persistence;
 using MongoDB.Driver;
 
 namespace API.Services;
 
 
-public class QuoteService
+public class QuoteService : IQuoteService
 {
     private readonly IMongoCollection<Quote> _collection;
 
-    public QuoteService(IOptionsMonitor<DbSettings> monitor)
+    public QuoteService(IMongoDbContext dbContext)
     {
-        
-        var mongoClient = new MongoClient(monitor.CurrentValue.ConnectionString);
-
-        
-
-        var db = mongoClient.GetDatabase(monitor.CurrentValue.DatabaseName);
-
-        _collection = db.GetCollection<Quote>(monitor.CurrentValue.QuotesCollectionName);
+        _collection = dbContext.GetQuoteCollection();
     }
 
-    public async Task<long> GetCount()
+    public async Task<List<Quote>> ListQuotes(int? skip = null, int? take = null)
     {
-        await _collection.InsertOneAsync(new Quote
+        var query = _collection.Find(_ => true);
+        if (skip != null)
         {
-            Content = "lol",
-            Score = 1
-        });
-        return await _collection.CountDocumentsAsync(x => x.Score > 0);
+            query = query.Skip(skip.Value);
+        }
+
+        if (take != null)
+        {
+            query = query.Limit(take.Value);
+        }
+
+        return await query.ToListAsync();
+    }
+
+    public async Task VoteForQuote(Guid quoteId)
+    {
+        var update = Builders<Quote>.Update.Inc(d => d.Score, 1);
+        await _collection.FindOneAndUpdateAsync(x => x.Id == quoteId, update);
+    }
+
+    public async Task<List<Quote>> ListTop(int take = 0)
+    {
+        return await _collection.Find(_ => true).SortByDescending(x => x.Score).Limit(take).ToListAsync();
+    }
+
+    public async Task ResetVotes(Guid quoteId)
+    {
+        var update = Builders<Quote>.Update.Set(d => d.Score, 0);
+        await _collection.FindOneAndUpdateAsync(x => x.Id == quoteId, update);
     }
 }

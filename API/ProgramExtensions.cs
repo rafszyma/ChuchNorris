@@ -1,5 +1,9 @@
-﻿using API.Services;
+﻿using API.Interfaces;
+using API.Persistence;
+using API.Services;
 using API.Settings;
+using Buisness.Settings;
+using Business.Interfaces;
 using Microsoft.OpenApi.Models;
 using Serilog;
 
@@ -11,10 +15,10 @@ public static class ProgramExtensions
     {
         var services = builder.Services;
         services.Configure<TokenSettings>(builder.Configuration.GetSection("Token"));
-        services.AddScoped<UserService>();
-        services.AddScoped<QuoteService>();
-
         services.Configure<DbSettings>(builder.Configuration.GetSection("MongoDb"));
+        services.AddScoped<UserService>();
+        services.AddScoped<IQuoteService, QuoteService>();
+        services.AddSingleton<IMongoDbContext, ChuckDbContext>();
     }
 
     public static void ConfigureLogger(this WebApplicationBuilder builder)
