@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Harvester", "Harvester\Harv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Business.csproj", "{EB364CA3-C10E-4FE4-82A0-F104532C26AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migration", "Migration\Migration.csproj", "{A8BF3836-45BC-4CFD-8B42-6ACE9DF05C5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{EB364CA3-C10E-4FE4-82A0-F104532C26AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB364CA3-C10E-4FE4-82A0-F104532C26AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB364CA3-C10E-4FE4-82A0-F104532C26AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8BF3836-45BC-4CFD-8B42-6ACE9DF05C5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8BF3836-45BC-4CFD-8B42-6ACE9DF05C5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8BF3836-45BC-4CFD-8B42-6ACE9DF05C5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8BF3836-45BC-4CFD-8B42-6ACE9DF05C5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

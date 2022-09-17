@@ -1,5 +1,4 @@
 ﻿using API.Interfaces;
-using API.Persistence;
 using Business.Interfaces;
 using Business.Persistence;
 using MongoDB.Driver;
@@ -32,10 +31,10 @@ public class QuoteService : IQuoteService
         return await query.ToListAsync();
     }
 
-    public async Task VoteForQuote(Guid quoteId)
+    public async Task<Quote> VoteForQuote(Guid quoteId)
     {
         var update = Builders<Quote>.Update.Inc(d => d.Score, 1);
-        await _collection.FindOneAndUpdateAsync(x => x.Id == quoteId, update);
+        return await _collection.FindOneAndUpdateAsync(x => x.Id == quoteId, update);
     }
 
     public async Task<List<Quote>> ListTop(int take = 0)
@@ -43,9 +42,9 @@ public class QuoteService : IQuoteService
         return await _collection.Find(_ => true).SortByDescending(x => x.Score).Limit(take).ToListAsync();
     }
 
-    public async Task ResetVotes(Guid quoteId)
+    public async Task<Quote> ResetVotes(Guid quoteId)
     {
         var update = Builders<Quote>.Update.Set(d => d.Score, 0);
-        await _collection.FindOneAndUpdateAsync(x => x.Id == quoteId, update);
+        return await _collection.FindOneAndUpdateAsync(x => x.Id == quoteId, update);
     }
 }

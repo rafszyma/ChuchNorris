@@ -1,4 +1,4 @@
-﻿namespace API.Settings;
+﻿namespace Business.Settings;
 
 public class DbSettings
 {

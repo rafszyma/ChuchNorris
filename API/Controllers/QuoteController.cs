@@ -7,17 +7,25 @@ public static class QuoteController
 {
     public static void AddQuoteEndpoints(this WebApplication app)
     {
-        app.MapGet("/quote/top", [Authorize(Roles = "User")]async (IQuoteService service) => Task.FromResult(Task.FromResult(Results.Ok(await service.ListTop(10)))));
-        app.MapGet("/quote/list", [Authorize(Roles = "User,Admin")]async (IQuoteService service, int? skip, int? take) => Task.FromResult(Results.Ok(await service.ListQuotes(skip, take))));
-        app.MapPut("/quote/vote/{id:guid}", [Authorize(Roles = "User,Admin")]async (Guid id, IQuoteService service) =>
+        app.MapGet("/quote/top",
+             [Authorize(Roles = $"{nameof(UserRoles.User)},{nameof(UserRoles.Admin)}")]
+            async (IQuoteService service) => Results.Ok(await service.ListTop(10)));
+        
+        app.MapGet("/quote/list",  
+            [Authorize(Roles = $"{nameof(UserRoles.User)},{nameof(UserRoles.Admin)}")]
+            async (IQuoteService service, int? skip, int? take) =>
+                Results.Ok(await service.ListQuotes(skip, take)));
+        
+        app.MapPut("/quote/vote/{id:guid}", [Authorize(Roles = $"{nameof(UserRoles.User)},{nameof(UserRoles.Admin)}")]async (Guid id, IQuoteService service) =>
         {
-            await service.VoteForQuote(id);
-            return Task.FromResult(Results.Ok());
+            var quote = await service.VoteForQuote(id);
+            return quote == null ? Results.NotFound() : Results.Ok();
         });
-        app.MapPut("/quote/reset/{id:guid}", [Authorize(Roles = "Admin")]async (Guid id, IQuoteService service) =>
+        
+        app.MapPut("/quote/reset/{id:guid}", [Authorize(Roles = nameof(UserRoles.Admin))]async (Guid id, IQuoteService service) =>
         {
-            await service.ResetVotes(id);
-            return Task.FromResult(Results.Ok());
+            var quote = await service.ResetVotes(id);
+            return quote == null ? Results.NotFound() : Results.Ok();
         });
     }
 }

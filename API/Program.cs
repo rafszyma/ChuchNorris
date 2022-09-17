@@ -1,28 +1,11 @@
-using System.Text;
 using API;
 using API.Controllers;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        var tokenSection = builder.Configuration.GetSection("Token");
-        options.IncludeErrorDetails = true;
-        options.Audience = tokenSection.GetSection("Audience").Value;
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidIssuer = tokenSection.GetSection("Issuer").Value,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(tokenSection.GetSection("Secret").Value)),
-        };
-    });
+builder.AddChuckAuthentication();
+
 builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 

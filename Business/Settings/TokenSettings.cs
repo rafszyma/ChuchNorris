@@ -1,4 +1,4 @@
-﻿namespace Buisness.Settings;
+﻿namespace Business.Settings;
 
 public class TokenSettings
 {

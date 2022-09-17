@@ -1,10 +1,9 @@
-﻿using API.Settings;
-using Business.Interfaces;
-using Business.Persistence;
+﻿using Business.Interfaces;
+using Business.Settings;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
-namespace API.Persistence;
+namespace Business.Persistence;
 
 public class ChuckDbContext : IMongoDbContext
 {
@@ -12,7 +11,7 @@ public class ChuckDbContext : IMongoDbContext
 
     private MongoClient Client { get; set; }
 
-    private IOptions<DbSettings> _settings;
+    private readonly IOptions<DbSettings> _settings;
 
     public ChuckDbContext(IOptions<DbSettings> settings)
     {

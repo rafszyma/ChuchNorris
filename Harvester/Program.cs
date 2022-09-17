@@ -1,8 +1,7 @@
-using API.Persistence;
-using API.Settings;
 using Business.Interfaces;
+using Business.Persistence;
+using Business.Settings;
 using Harvester;
-using Harvester.Settings;
 using Serilog;
 
 
@@ -23,6 +22,5 @@ var host = Host.CreateDefaultBuilder(args)
         builder.AddSerilog(logger);
     })
     .Build();
-
 
 await host.RunAsync();

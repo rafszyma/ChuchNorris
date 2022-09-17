@@ -1,4 +1,4 @@
-﻿namespace Harvester.Settings;
+﻿namespace Business.Settings;
 
 public class WorkerSettings
 {
