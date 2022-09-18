@@ -3,14 +3,14 @@ using Business.Interfaces;
 using Business.Persistence;
 using MongoDB.Driver;
 
-namespace API.Services;
+namespace API.Business;
 
 
-public class QuoteService : IQuoteService
+public class QuoteRepository : IQuoteRepository
 {
     private readonly IMongoCollection<Quote> _collection;
 
-    public QuoteService(IMongoDbContext dbContext)
+    public QuoteRepository(IMongoDbContext dbContext)
     {
         _collection = dbContext.GetQuoteCollection();
     }
@@ -31,7 +31,7 @@ public class QuoteService : IQuoteService
         return await query.ToListAsync();
     }
 
-    public async Task<Quote> VoteForQuote(Guid quoteId)
+    public async Task<Quote?> VoteForQuote(Guid quoteId)
     {
         var update = Builders<Quote>.Update.Inc(d => d.Score, 1);
         return await _collection.FindOneAndUpdateAsync(x => x.Id == quoteId, update);
@@ -42,7 +42,7 @@ public class QuoteService : IQuoteService
         return await _collection.Find(_ => true).SortByDescending(x => x.Score).Limit(take).ToListAsync();
     }
 
-    public async Task<Quote> ResetVotes(Guid quoteId)
+    public async Task<Quote?> ResetVotes(Guid quoteId)
     {
         var update = Builders<Quote>.Update.Set(d => d.Score, 0);
         return await _collection.FindOneAndUpdateAsync(x => x.Id == quoteId, update);

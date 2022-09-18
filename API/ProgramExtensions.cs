@@ -1,6 +1,6 @@
 ﻿using System.Text;
+using API.Business;
 using API.Interfaces;
-using API.Services;
 using Business.Interfaces;
 using Business.Persistence;
 using Business.Settings;
@@ -19,7 +19,7 @@ public static class ProgramExtensions
         services.Configure<TokenSettings>(builder.Configuration.GetSection("Token"));
         services.Configure<DbSettings>(builder.Configuration.GetSection("MongoDb"));
         services.AddScoped<UserService>();
-        services.AddScoped<IQuoteService, QuoteService>();
+        services.AddScoped<IQuoteRepository, QuoteRepository>();
         services.AddSingleton<IMongoDbContext, ChuckDbContext>();
     }
 

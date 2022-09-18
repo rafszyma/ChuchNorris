@@ -2,7 +2,7 @@
 
 namespace API.Interfaces;
 
-public interface IQuoteService
+public interface IQuoteRepository
 {
     public Task<List<Quote>> ListQuotes(int? skip = null, int? take = null);
 

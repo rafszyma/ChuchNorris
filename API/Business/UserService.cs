@@ -5,7 +5,7 @@ using Business.Settings;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace API.Services;
+namespace API.Business;
 
 
 public class UserService
